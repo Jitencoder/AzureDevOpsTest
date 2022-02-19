@@ -21,6 +21,7 @@ namespace ASPNetCoreTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddCors();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -41,7 +42,7 @@ namespace ASPNetCoreTest
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseCors(options => { options.AllowAnyOrigin(); });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
